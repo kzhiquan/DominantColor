@@ -37,7 +37,10 @@ func kmeans<T : ClusteredType>(
     ) -> [Cluster<T>] {
             
     let n = points.count
-    assert(k <= n, "k cannot be larger than the total number of points")
+    //assert(k <= n, "k cannot be larger than the total number of points")
+    guard k <= n else {
+        return []
+    }
 
     var centroids = points.randomValues(k, seed: seed)
     var memberships = [Int](repeating: -1, count: n)
